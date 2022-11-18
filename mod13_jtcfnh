@@ -1,0 +1,71 @@
+import unittest
+import datetime
+
+def symbol(symbol):
+    
+    if len(symbol) > 7 or symbol != symbol.upper():
+        print("Symbol: " +symbol+ " did not pass the test")
+        return False
+    else:
+        print("Symbol: " +symbol+ " did passed the test") 
+        return True
+
+def chart(chart):
+    if chart < 1 or chart > 2:
+        print("Chart: " +str(chart)+ " did not pass the test")
+        return False
+    else:
+        print("Chart: " +str(chart)+ " did passed the test")
+        return True
+    
+def timeSeries(timeSeries):
+    if timeSeries < 1 or timeSeries > 4:
+        print("Time Series: " +str(timeSeries)+ " did not pass the test")
+        return False
+    else:
+        print("Time Series: " +str(timeSeries)+ " did not pass the test")
+        return True
+            
+def startDate(startDate):
+    try:
+        checkStartDate = datetime.datetime.strptime(startDate, '%Y-%m-%d')
+    except ValueError:
+        print(startDate + " Does not meet format YYYY-MM-DD")
+        return False
+    else:
+        print(startDate + " Meets required format YYYY-MM-DD")
+        return True
+            
+def endDate(endDate):
+    try:
+        checkEndDate = datetime.datetime.strptime(endDate, '%Y-%m-%d')
+    except ValueError:
+        print(endDate + " Does not meet format YYYY-MM-DD")
+        return False
+    else:
+        print(endDate + " Meets required format YYYY-MM-DD")
+        return True
+    
+
+
+
+
+class MyTestCase(unittest.TestCase):
+  
+   # Returns true if 1 + '1' raises a TypeError
+   def testFunction(self):
+      self.assertEqual(symbol("GOOGL"), True)
+      self.assertEqual(symbol("googl"), False)
+      self.assertEqual(chart(1), True)
+      self.assertEqual(chart(6), False)
+      self.assertEqual(timeSeries(2), True)
+      self.assertEqual(timeSeries(24), False)
+      self.assertEqual(startDate("2018-09-02"), True)
+      self.assertEqual(startDate("07-02-1999"), False)
+      self.assertEqual(endDate("2018-09-02"), True)
+      self.assertEqual(endDate("07-02-1999"), False)
+      
+
+  
+if __name__ == '__main__': 
+    unittest.main()
